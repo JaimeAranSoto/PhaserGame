@@ -45,7 +45,7 @@
             this.add.image(150, 100, 'bg');
             platforms = this.physics.add.staticGroup();
 
-            player = this.physics.add.sprite(150, 100, 'calvo');
+            player = this.physics.add.sprite(150, 150, 'calvo');
             player.setBounce(0);
             player.setCollideWorldBounds(true);
 
@@ -71,7 +71,11 @@
         }
 
         function gameover(player, ball) {
-
+            player.setPosition(150, 150);
+            balls.children.iterate(function (child) {
+                child.destroy();
+            });
+            createBall();
         }
         function divideBall(wave, ball) {
             if (ball.scale > 0.25) {
@@ -80,14 +84,14 @@
                 var ball1 = balls.create(ball.x - 10, 16, 'ball');
                 ball1.setBounce(1);
                 ball1.setCollideWorldBounds(true);
-                ball1.setVelocity(-20, 50);
+                ball1.setVelocity(-20, -50);
                 ball1.setScale(newScale);
                 ball1.scale = newScale;
 
                 var ball2 = balls.create(ball.x + 10, 16, 'ball');
                 ball2.setBounce(1);
                 ball2.setCollideWorldBounds(true);
-                ball2.setVelocity(20, 50);
+                ball2.setVelocity(20, -50);
                 ball2.setScale(newScale);
                 ball2.scale = newScale;
             }
@@ -126,11 +130,13 @@
             else {
                 player.setVelocityX(0);
 
-                player.anims.play('move');
+
             }
 
             if (Phaser.Input.Keyboard.JustDown(spacebar)) {
                 createWave();
+                player.anims.play('attack', true);
+
             }
         }
 
