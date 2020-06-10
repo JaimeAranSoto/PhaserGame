@@ -50,8 +50,9 @@ class GameScene extends Phaser.Scene {
         player.setCollideWorldBounds(true);
         player.movable = true;
         player.stock = 1;
-        player.setScale(0.7);
+        player.setScale(0.8);
         player.speed = 210;
+
         //Animaciones
         this.anims.create({
             key: 'attack',
@@ -162,7 +163,7 @@ class GameScene extends Phaser.Scene {
         obj.destroy();
     }
 
-    update() {
+    update() {        
         if (player.movable) {
             if (cursors.left.isDown) {
                 player.setVelocityX(-(player.speed+10*level));
