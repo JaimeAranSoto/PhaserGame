@@ -51,6 +51,7 @@ class GameScene extends Phaser.Scene {
         player.movable = true;
         player.stock = 1;
         player.setScale(0.7);
+        player.speed = 210;
         //Animaciones
         this.anims.create({
             key: 'attack',
@@ -108,7 +109,7 @@ class GameScene extends Phaser.Scene {
             var ball1 = balls.create(ball.x - 10, 16, 'ball');
             ball1.setBounce(1);
             ball1.setCollideWorldBounds(true);
-            ball1.setVelocity(-20, -40);
+            ball1.setVelocity(-20, -20);
             ball1.setScale(newScale);
             ball1.body.allowGravity = false;
             ball1.scale = newScale;
@@ -116,7 +117,7 @@ class GameScene extends Phaser.Scene {
             var ball2 = balls.create(ball.x + 10, 16, 'ball');
             ball2.setBounce(1);
             ball2.setCollideWorldBounds(true);
-            ball2.setVelocity(20, -40);
+            ball2.setVelocity(20, -20);
             ball2.setScale(newScale);
             ball2.body.allowGravity = false;
             ball2.scale = newScale;
@@ -164,11 +165,11 @@ class GameScene extends Phaser.Scene {
     update() {
         if (player.movable) {
             if (cursors.left.isDown) {
-                player.setVelocityX(-260);
+                player.setVelocityX(-(player.speed+10*level));
                 player.anims.play('move', true);
             }
             else if (cursors.right.isDown) {
-                player.setVelocityX(260);
+                player.setVelocityX(player.speed+10*level);
                 player.anims.play('move', true);
             }
             else {
