@@ -10,9 +10,13 @@
     <script type="module">
         import GameScene from './GameScene.js';
         import MainMenu from './MainMenu.js';
+        import Leaderboard from './Leaderboard.js';
+        import Gameover from './Gameover.js'
 
         var gameScene = new GameScene();
         var mainMenu = new MainMenu();
+        var leaderboard = new Leaderboard();
+        var gameover = new Gameover();
 
         var config = {
             type: Phaser.AUTO,
@@ -37,6 +41,8 @@
 
         game.scene.add('mainMenu', mainMenu);
         game.scene.add('gameScene', gameScene);
+        game.scene.add('leaderboard', leaderboard);
+        game.scene.add('gameover', gameover);
 
         game.scene.start('mainMenu');
 
