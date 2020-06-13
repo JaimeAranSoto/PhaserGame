@@ -8,6 +8,9 @@ var wave;
 var newScale;
 var level = 1;
 var rnd;
+
+var score;
+
 class GameScene extends Phaser.Scene {
 
     constructor() {
@@ -17,6 +20,7 @@ class GameScene extends Phaser.Scene {
 
     init() {
         level = 1;
+        score = 0;
     };
 
 
@@ -99,9 +103,17 @@ class GameScene extends Phaser.Scene {
         balls.clear(true);
         level = 1;
         this.createBall();
+
+        //Save Score
+        localStorage.setItem(score, 'score');
+        score = 0;
+        this.scene.switch('gameover');
     }
 
     divideBall(wave, ball) {
+        //Simple score:
+        score = score + 1;
+
         if (ball.scale > 0.25) {
             this.sound.play('ballSound2');
 
