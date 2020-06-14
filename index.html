@@ -12,7 +12,6 @@
         import MainMenu from './MainMenu.js';
         import Leaderboard from './Leaderboard.js';
         import Gameover from './Gameover.js';
-        import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
 
         var config = {
             type: Phaser.AUTO,
@@ -30,17 +29,14 @@
                     gravity: { y: 300 },
                     debug: false
                 }
-            },
-            dom: {
-                createContainer: true
             }
         };
 
         var game = new Phaser.Game(config);
         var gameScene = new GameScene();
         var mainMenu = new MainMenu();
-        var leaderboard = new Leaderboard(game);
-        var gameover = new Gameover(config);
+        var leaderboard = new Leaderboard();
+        var gameover = new Gameover();
 
         game.scene.add('mainMenu', mainMenu);
         game.scene.add('gameScene', gameScene);

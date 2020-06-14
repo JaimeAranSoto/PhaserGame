@@ -4,7 +4,7 @@ var leaderboard = [];
 var leaderboard_id = "lb";
 
 class Leaderboeard extends Phaser.Scene{
-    constructor(game){
+    constructor(){
         super({key:'leaderboard'});
         //lv = new ListView(game, parent, bounds, options);
     }
