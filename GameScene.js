@@ -126,10 +126,11 @@ class GameScene extends Phaser.Scene {
         player.setScale(0.3);
 
         //Save Score
-        localStorage.setItem(score, 'score');
-        score = 0;
+        var saveScore = JSON.stringify(score);
+        localStorage.setItem('score',saveScore);
+        //score = 0;
+        
         this.scene.switch('gameover');
-
     }
 
     divideBall(wave, ball) {

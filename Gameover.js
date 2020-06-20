@@ -39,10 +39,12 @@ class Gameover extends Phaser.Scene{
         this.text_name;
 
         this.button;
+        this.score = 0;
     }
 
     preload(){
-        //var score = JSON.parse(localStorage.getItem(scoreId));
+        var scoreString = localStorage.getItem('score');
+        this.score = JSON.parse(scoreString);
         this.load.bitmapFont('arcade', 'sprites/UI/font.png', 'sprites/UI/font.xml');
         this.load.image('block', 'sprites/UI/block.png')
 
@@ -85,9 +87,9 @@ class Gameover extends Phaser.Scene{
         this.button.on('pointerover', ()=> this.enterButtonHoverState());
         this.button.on('pointerdown', ()=>this.saveScore());
 
-
+        this.score *= 100;
         this.text_name = this.add.bitmapText(100, 115, 'arcade', this.name,charSize * 2);
-        this.text_score = this.add.bitmapText(170, 120, 'arcade', '100000',charSize);
+        this.text_score = this.add.bitmapText(170, 120, 'arcade', this.score,charSize);
     }
 
     enterButtonHoverState() {
@@ -99,7 +101,28 @@ class Gameover extends Phaser.Scene{
     }
 
     saveScore(){
-        console.log("PAso");
+        var pd = Object.create(playerData);
+        pd.player_name = this.name;
+        pd.player_score = this.score;
+
+        var scoreList = JSON.parse(localStorage.getItem(leaderboard_id));
+        if(scoreList != null){
+            scoreList.push(pd);
+            scoreList.sort( function(a,b){return b.player_score - a.player_score} );
+            console.log(scoreList);
+            if(scoreList.length > 5){
+                scoreList.pop();
+            }
+
+        }else{
+            scoreList = [];
+            scoreList.push(pd);
+        }
+
+        var s = JSON.stringify(scoreList);
+        localStorage.setItem(leaderboard_id, s);
+
+        this.scene.switch('leaderboard');
     }
 
     moveLeft ()
