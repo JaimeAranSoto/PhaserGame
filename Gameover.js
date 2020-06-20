@@ -122,6 +122,9 @@ class Gameover extends Phaser.Scene{
         var s = JSON.stringify(scoreList);
         localStorage.setItem(leaderboard_id, s);
 
+        var scene = this.scene.get('leaderboard');
+        scene.scene.restart();
+        
         this.scene.switch('leaderboard');
     }
 

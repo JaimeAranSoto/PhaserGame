@@ -104,14 +104,6 @@ class GameScene extends Phaser.Scene {
 
     }
 
-    updated() {
-
-    }
-
-    end() {
-
-    }
-
     gameover(player, ball) {
         player.setPosition(150, 150);
         balls.clear(true);
