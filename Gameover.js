@@ -51,6 +51,7 @@ class Gameover extends Phaser.Scene{
     }
 
     create(){
+        
 
         var title = this.add.bitmapText(78, 20, 'arcade', 'Game over',charSize * 2);
 

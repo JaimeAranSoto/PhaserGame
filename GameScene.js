@@ -14,6 +14,7 @@ var score;
 var charge = 10;
 var label_charge;
 var label_level;
+var label_score;
 var sound_gameover;
 class GameScene extends Phaser.Scene {
 
@@ -102,6 +103,9 @@ class GameScene extends Phaser.Scene {
         label_level = this.add.text(5, 18, 'Level: 1');
         label_level.setTint(0xffff87, 0x8eff51, 0xffff87, 0x8eff51);
 
+        label_score = this.add.text(200, 5, 'Score: 0');
+
+
     }
 
     gameover(player, ball) {
@@ -110,7 +114,7 @@ class GameScene extends Phaser.Scene {
         level = 1;
         this.createBall();
 
-        
+
         charge = 10;
         label_charge.setText('Charges: 10');
         label_level.setText('Level: 1');
@@ -119,16 +123,16 @@ class GameScene extends Phaser.Scene {
 
         //Save Score
         var saveScore = JSON.stringify(score);
-        localStorage.setItem('score',saveScore);
+        localStorage.setItem('score', saveScore);
         //score = 0;
-        
+
         this.scene.switch('gameover');
     }
 
     divideBall(wave, ball) {
         //Simple score:
         score = score + 1;
-
+        label_score.setText("Score: " + score);
         if (ball.scale > 0.25) {
             this.sound.play('ballSound2');
 
@@ -178,8 +182,7 @@ class GameScene extends Phaser.Scene {
         var ball = balls.create(x, 16, 'ball');
         ball.setBounce(1);
         ball.setCollideWorldBounds(true);
-
-        ball.setVelocity(rnd.sign() * (100 + 5 * level), -55 + 5 / level);
+        ball.setVelocity(rnd.sign() * (80 + 25 / level), -55 + 5 / level);
         ball.scale = 1;
         ball.body.allowGravity = false;
 
